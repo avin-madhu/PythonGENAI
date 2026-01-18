@@ -1,0 +1,13 @@
+# Secrets
+.env
+**/.env
+RAGandFastAPI/.env
+
+# Databases
+**/chroma_db/
+
+# Python Caches
+__pycache__/
+**/*.pyc
+
+miniLM
