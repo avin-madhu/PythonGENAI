@@ -6,6 +6,7 @@ from todoBackend import models
 from todoBackend import schema
 from todoBackend.database import engine, SessionLocal
 from todoBackend.models import Base
+from todoBackend.routers import auth
 
 app = FastAPI()
 app.add_middleware(
@@ -17,6 +18,7 @@ app.add_middleware(
 
 # makes all the tables in the database on run
 Base.metadata.create_all(bind=engine)
+app.include_router(auth.router)
 
 
 # dependency to get a DB connection
@@ -66,5 +68,4 @@ async def delete_task(id: int, todo: schema.TodoSchema, db: Session = Depends(ge
     query.delete(synchronize_session=False)
     db.commit()
     db.refresh(data)
-
     return data
