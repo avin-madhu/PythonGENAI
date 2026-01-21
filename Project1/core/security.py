@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 
 from jose import jwt
 
-from project1.config import settings
+from Project1.config import settings
 
 
 def create_access_token(data: dict) -> str:

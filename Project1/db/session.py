@@ -1,7 +1,7 @@
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.orm import declarative_base
 
-from project1.config import settings
+from Project1.config import settings
 
 engine = create_async_engine(
     settings.database_url,
@@ -9,9 +9,8 @@ engine = create_async_engine(
     pool_pre_ping=True,  # just do a pre health check of the DB in case it time out or anything
 )
 
-AsyncSessionLocal = sessionmaker(
+AsyncSessionLocal = async_sessionmaker(
     bind=engine,
-    class_=AsyncSession,
     expire_on_commit=False,
     # usually after saving SQLalchemy "expires" objects, this is to not let it do that so we can still access objects like users
 )

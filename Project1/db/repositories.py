@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project1.db.models import User
+from Project1.db.models import User
 
 
 async def get_user_by_username(

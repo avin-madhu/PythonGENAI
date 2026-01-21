@@ -3,11 +3,11 @@ from fastapi.security import OAuth2PasswordBearer
 from langgraph_sdk.auth.exceptions import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from project1.core.security import create_access_token
-from project1.db.repositories import get_user_by_username, create_user
-from project1.db.session import get_db
-from project1.schemas.auth import UserCreate, TokenResponse, UserLogin
-from project1.utils.hashing import hash_password, verify_password
+from Project1.core.security import create_access_token
+from Project1.db.repositories import get_user_by_username, create_user
+from Project1.db.session import get_db
+from Project1.schemas.auth import UserCreate, TokenResponse, UserLogin
+from Project1.utils.hashing import hash_password, verify_password
 
 router = APIRouter(tags=["auth"])
 

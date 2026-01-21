@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
-from project1.api.v1 import health, auth
-from project1.config import settings
-from project1.db.initDB import init_db
-from project1.db.session import engine
+from Project1.api.v1 import health, auth
+from Project1.config import settings
+from Project1.db.initDB import init_db
+from Project1.db.session import engine
 
 app = FastAPI(title=settings.app_name)
 
