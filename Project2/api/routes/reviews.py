@@ -10,7 +10,6 @@ from schemas.review import ReviewCreate
 
 router = APIRouter(tags=["Reviews"])
 
-
 @router.post("/tools/{tool_id}/reviews")
 async def add_review(
     tool_id: int,
@@ -65,26 +64,32 @@ async def get_pending_reviews(db: AsyncSession = Depends(get_db)):
     )
     return result.scalars().all()
 
+
 @router.put("/reviews/{review_id}/approve", dependencies=[Depends(admin_only)])
 async def approve_review(review_id: int, db: AsyncSession = Depends(get_db)):
     review = await db.get(Review, review_id)
     if not review:
         raise HTTPException(status_code=404, detail="Review not found")
 
+    target_tool_id = review.tool_id
     review.approved = True
+
     await db.commit()
 
-    # Recalculate avg rating
     avg_stmt = select(func.avg(Review.rating)).where(
-        Review.tool_id == review.tool_id,
+        Review.tool_id == target_tool_id,
         Review.approved == True
     )
-
     result = await db.execute(avg_stmt)
-    avg_rating = result.scalar()
+    new_avg = result.scalar() or 0
 
-    tool = await db.get(Tool, review.tool_id)
-    tool.avg_rating = round(avg_rating or 0, 2)
+    tool = await db.get(Tool, target_tool_id)
+    if tool:
+        tool.avg_rating = round(new_avg, 2)
+        await db.commit()
+        final_rating = round(new_avg, 2)
 
-    await db.commit()
-    return {"message": "Review approved"}
+    return {
+        "message": "Review approved",
+        "new_rating": final_rating
+    }
