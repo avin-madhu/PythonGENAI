@@ -9,7 +9,6 @@ from seed import DatabaseSeeder
 
 seeder = DatabaseSeeder()
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
 
@@ -19,7 +18,6 @@ async def lifespan(app: FastAPI):
 
     yield
     await engine.dispose()
-
 
 app = FastAPI(
     title="AI Tool Finder API",
