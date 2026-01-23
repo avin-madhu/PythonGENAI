@@ -9,6 +9,7 @@ from models.user import User, UserRole
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
+
 async def get_db():
     db = SessionLocal()
     try:
@@ -33,6 +34,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
         raise HTTPException(status_code=401, detail="User not found")
 
     return user
+
 
 async def admin_only(user: User = Depends(get_current_user)):
     if user.role != UserRole.ADMIN:
