@@ -26,7 +26,6 @@ texts = [
     "My name is Avin Madhu",
     "I am a software developer at UST",
     "I am 22 years old",
-
 ]
 
 CHROMA_DB_DIR = "chroma_db"
