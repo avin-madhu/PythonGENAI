@@ -1,3 +1,4 @@
 1. learn to make a basic add() function tools that integrate with an agent, using langgraph.
 2. add more tools to this like arxiv, wiki and tavily search (kind of a search engine)
 3. STREAMS in langgraph!
+4. RAG in langgraph, creating a retriever in langGraph, corrective RAG and Adaptive RAG
