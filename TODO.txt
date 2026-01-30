@@ -3,3 +3,4 @@
 3. STREAMS in langgraph!
 4. RAG in langgraph, creating a retriever in langGraph, corrective RAG and Adaptive RAG
 5. Learn Llama index and efficient retrieval
+6. learn assigned project
